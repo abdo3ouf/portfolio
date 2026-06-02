@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abdurahman Ayman — Mechatronics Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0b;
+    --bg2: #111113;
+    --bg3: #18181c;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --text: #f0efe8;
+    --muted: #888780;
+    --accent: #1D9E75;
+    --accent2: #5DCAA5;
+    --accent-dim: rgba(29,158,117,0.12);
+    --red: #D85A30;
+    --amber: #EF9F27;
+    --blue: #378ADD;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 4rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(10,10,11,0.85);
+    backdrop-filter: blur(12px);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent2); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent2);
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    max-width: 14ch;
+    margin-bottom: 2rem;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255,255,255,0.25);
+  }
+
+  .hero-desc {
+    max-width: 480px;
+    font-size: 1.05rem;
+    color: var(--muted);
+    margin-bottom: 3rem;
+    line-height: 1.8;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border: 1px solid var(--accent);
+  }
+  .btn-primary:hover { background: var(--accent2); border-color: var(--accent2); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border2);
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.04); }
+
+  /* ── HERO STATS ── */
+  .hero-stats {
+    position: absolute;
+    right: 4rem;
+    bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: flex-end;
+  }
+
+  .stat-item {
+    text-align: right;
+  }
+
+  .stat-number {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--text);
+  }
+
+  .stat-number span { color: var(--accent2); }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.25rem;
+  }
+
+  /* ── SECTION ── */
+  section {
+    padding: 7rem 4rem;
+    position: relative;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--accent2);
+    opacity: 0.7;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--muted);
+    font-size: 1.05rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.85;
+  }
+
+  .about-text p strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .skills-block { display: flex; flex-direction: column; gap: 1.75rem; }
+
+  .skill-category {
+    border-left: 2px solid var(--accent-dim);
+    padding-left: 1.25rem;
+  }
+
+  .skill-cat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 0.6rem;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .skill-tag {
+    font-size: 0.78rem;
+    color: var(--muted);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 0.3rem 0.75rem;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .skill-tag:hover {
+    color: var(--text);
+    border-color: var(--border2);
+    background: rgba(29,158,117,0.06);
+  }
+
+  /* ── PROJECTS ── */
+  #projects { background: var(--bg2); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5px;
+  }
+
+  .project-card {
+    background: var(--bg);
+    padding: 2.25rem;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, background 0.3s;
+    cursor: default;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-card:hover {
+    border-color: var(--border2);
+    background: var(--bg3);
+  }
+
+  .project-domain {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 0.9rem;
+    opacity: 0.85;
+  }
+
+  .project-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .project-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.6rem;
+    border-radius: 99px;
+  }
+
+  .project-year {
+    position: absolute;
+    top: 2.25rem;
+    right: 2.25rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    opacity: 0.5;
+  }
+
+  /* ── EDUCATION ── */
+  .edu-card {
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+    max-width: 700px;
+    position: relative;
+    background: var(--bg3);
+  }
+
+  .edu-card::after {
+    content: '';
+    position: absolute;
+    top: -1px; left: 2.5rem;
+    width: 60px;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  .edu-degree {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .edu-uni {
+    font-size: 1rem;
+    color: var(--accent2);
+    margin-bottom: 1.5rem;
+  }
+
+  .edu-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .edu-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .edu-meta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.7;
+  }
+
+  .edu-meta-value {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+
+  .edu-highlight {
+    margin-top: 1.5rem;
+    padding: 1rem 1.25rem;
+    background: var(--accent-dim);
+    border-left: 2px solid var(--accent);
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .edu-highlight strong { color: var(--accent2); font-weight: 500; }
+
+  /* ── ACTIVITIES ── */
+  #activities { background: var(--bg2); }
+
+  .activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 800px;
+    border: 1px solid var(--border);
+  }
+
+  .activity-item {
+    padding: 2rem 2.25rem;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: start;
+    transition: background 0.2s;
+  }
+
+  .activity-item:last-child { border-bottom: none; }
+  .activity-item:hover { background: var(--bg3); }
+
+  .activity-role {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text);
+    margin-bottom: 0.35rem;
+  }
+
+  .activity-org {
+    font-size: 0.85rem;
+    color: var(--accent2);
+    margin-bottom: 0.6rem;
+  }
+
+  .activity-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .activity-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    white-space: nowrap;
+    margin-top: 0.15rem;
+  }
+
+  /* ── CONTACT ── */
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .contact-cta {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 2.8rem;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-cta span {
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255,255,255,0.25);
+  }
+
+  .contact-sub {
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    border: 1px solid var(--border);
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+    group: true;
+  }
+  .contact-link:last-child { border-bottom: none; }
+  .contact-link:hover { background: var(--bg3); }
+
+  .contact-link-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.2rem;
+  }
+
+  .contact-link-value {
+    font-size: 0.92rem;
+    color: var(--text);
+  }
+
+  .contact-link-arrow {
+    color: var(--muted);
+    font-size: 1rem;
+    transition: transform 0.2s, color 0.2s;
+  }
+  .contact-link:hover .contact-link-arrow {
+    transform: translate(3px, -3px);
+    color: var(--accent2);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2rem 4rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    opacity: 0.6;
+  }
+
+  /* ── DIVIDER LINE ── */
+  .h-line {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    margin: 0;
+  }
+
+  /* ── PROJECT MEDIA ── */
+  .project-media {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 1.5rem;
+    border-radius: 2px;
+    background: var(--bg2);
+  }
+
+  .project-media-video {
+    width: 100%;
+    aspect-ratio: 16/9;
+    display: block;
+    margin-bottom: 1.5rem;
+    border-radius: 2px;
+    background: #000;
+  }
+
+  /* ── SCROLL ANIMATION ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.25rem 2rem; }
+    .hero { padding: 7rem 2rem 10rem; }
+    .hero-stats { right: 2rem; bottom: 2.5rem; flex-direction: row; gap: 2rem; align-items: flex-end; }
+    section { padding: 5rem 2rem; }
+    .about-grid, .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .nav-links { gap: 1.5rem; }
+  }
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .hero h1 { font-size: clamp(2.8rem, 12vw, 5rem); }
+    .hero-stats { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">AA<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#activities">Activities</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">Mechatronics Engineer</div>
+  <h1>Abdurahman<br><em>Ayman</em></h1>
+  <p class="hero-desc">Building at the intersection of embedded systems, control theory, and mechanical design — from PID-controlled actuators to custom PCBs.</p>
+  <div class="hero-actions">
+    <a href="#projects" class="btn btn-primary">View Projects</a>
+    <a href="#contact" class="btn btn-outline">Get in Touch ↗</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-number">3.84<span>/4</span></div>
+      <div class="stat-label">CGPA</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">5<span>+</span></div>
+      <div class="stat-label">Projects</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">'28</div>
+      <div class="stat-label">Expected Grad</div>
+    </div>
+  </div>
+</section>
+
+<div class="h-line"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header reveal">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>I'm a <strong>Mechatronics Engineering student</strong> at Nile University, Giza — on a full academic scholarship — with a deep interest in how software meets the physical world.</p>
+      <p>My work spans the full stack of engineering: designing and routing PCBs, writing embedded firmware in C++, implementing feedback control algorithms, and modeling mechanical assemblies in CAD.</p>
+      <p>Whether it's a closed-loop motor controller or an autonomous robot, I enjoy projects where precision matters and every layer of the system has to talk to every other.</p>
+    </div>
+
+    <div class="skills-block reveal">
+      <div class="skill-category">
+        <div class="skill-cat-label">Programming</div>
+        <div class="skill-tags">
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">MATLAB</span>
+          <span class="skill-tag">Arduino (Embedded C)</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-label">Embedded Systems</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Arduino</span>
+          <span class="skill-tag">Microcontrollers</span>
+          <span class="skill-tag">Motor Drivers</span>
+          <span class="skill-tag">HC-05 Bluetooth</span>
+          <span class="skill-tag">Sensors</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-label">Electronics</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PCB Design</span>
+          <span class="skill-tag">Analog Electronics</span>
+          <span class="skill-tag">Op-Amps</span>
+          <span class="skill-tag">Power Supplies</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-label">Control & CAD</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PID Control</span>
+          <span class="skill-tag">Closed-Loop Systems</span>
+          <span class="skill-tag">Fusion 360</span>
+          <span class="skill-tag">AutoCAD</span>
+          <span class="skill-tag">Proteus</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="h-line"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Projects</h2>
+  </div>
+
+  <div class="projects-grid">
+
+    <div class="project-card reveal">
+      <div class="yt-wrap" data-id="4VkqPCvGnz0" style="position:relative;width:100%;aspect-ratio:16/9;margin-bottom:1.5rem;border-radius:2px;overflow:hidden;cursor:pointer;background:#000;">
+        <img src="https://img.youtube.com/vi/4VkqPCvGnz0/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <div style="width:56px;height:56px;background:rgba(255,0,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+            <div style="width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:18px solid #fff;margin-left:4px;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="project-year">Spring 2026</div>
+      <div class="project-domain">Control Systems · Embedded</div>
+      <div class="project-name">PID-Controlled Linear Motion System</div>
+      <p class="project-desc">Closed-loop positioning mechanism using a stepper motor and chain-drive assembly. Integrated an incremental rotary encoder for shaft rotation feedback and programmed an embedded PID loop to minimize positional error.</p>
+      <div class="project-chips">
+        <span class="chip">PID Control</span>
+        <span class="chip">Stepper Motor</span>
+        <span class="chip">Rotary Encoder</span>
+        <span class="chip">Embedded C</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <img class="project-media" src="https://raw.githubusercontent.com/abdo3ouf/portfolio-assets/main/Power%20Supply%20Prototype.jpg" alt="Power Supply Prototype">
+      <div class="yt-wrap" data-id="gq9D_LTkxGI" style="position:relative;width:100%;aspect-ratio:16/9;margin-bottom:1.5rem;border-radius:2px;overflow:hidden;cursor:pointer;background:#000;">
+        <img src="https://img.youtube.com/vi/gq9D_LTkxGI/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <div style="width:56px;height:56px;background:rgba(255,0,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+            <div style="width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:18px solid #fff;margin-left:4px;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="project-year">Spring 2026</div>
+      <div class="project-domain">PCB Design · Power Electronics</div>
+      <div class="project-name">Multi-Output Power Supply</div>
+      <p class="project-desc">Bench DC power supply with fixed rails (±5V, ±9V) and variable outputs up to ±12V. Full custom PCB from schematic capture through track routing, validated via hardware testing.</p>
+      <div class="project-chips">
+        <span class="chip">PCB Design</span>
+        <span class="chip">Schematic Capture</span>
+        <span class="chip">Voltage Regulation</span>
+        <span class="chip">Power Electronics</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <img class="project-media" src="https://raw.githubusercontent.com/abdo3ouf/portfolio-assets/main/Robotic%20Parking%20Assistanta.jpeg" alt="Robot Parking Assistant">
+      <div class="yt-wrap" data-id="cQC8xoLnKMY" style="position:relative;width:100%;aspect-ratio:16/9;margin-bottom:1.5rem;border-radius:2px;overflow:hidden;cursor:pointer;background:#000;">
+        <img src="https://img.youtube.com/vi/cQC8xoLnKMY/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <div style="width:56px;height:56px;background:rgba(255,0,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+            <div style="width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:18px solid #fff;margin-left:4px;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="project-year">Spring 2025</div>
+      <div class="project-domain">Robotics · Embedded</div>
+      <div class="project-name">Robot Parking Assistant</div>
+      <p class="project-desc">4WD mobile robot with autonomous obstacle avoidance via ultrasonic sensors. Wireless remote maneuvering over HC-05 Bluetooth. Presented at UGRF 20th Edition.</p>
+      <div class="project-chips">
+        <span class="chip">C++</span>
+        <span class="chip">Arduino</span>
+        <span class="chip">HC-05 Bluetooth</span>
+        <span class="chip">Ultrasonic Sensors</span>
+        <span class="chip">4WD</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <img class="project-media" src="https://raw.githubusercontent.com/abdo3ouf/portfolio-assets/main/Autonomous%20Ultrasonic%20Radar.jpeg" alt="Autonomous Ultrasonic Radar">
+      <div class="project-year">Fall 2025</div>
+      <div class="project-domain">Sensors · Signal Processing</div>
+      <div class="project-name">Autonomous Ultrasonic Radar</div>
+      <p class="project-desc">180° scanning radar using a servo-mounted HC-SR04 sensor with a real-time obstacle visualization interface in Processing IDE. Includes an analog comparator circuit for continuous low-battery alerting.</p>
+      <div class="project-chips">
+        <span class="chip">HC-SR04</span>
+        <span class="chip">Servo</span>
+        <span class="chip">Processing IDE</span>
+        <span class="chip">Analog Comparator</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <img class="project-media" src="https://raw.githubusercontent.com/abdo3ouf/portfolio-assets/main/Arbor%20Press%20Project%20_%20prototype.jpeg" alt="Arbor Press Prototype">
+      <div class="project-year">Spring 2026</div>
+      <div class="project-domain">Mechanical Design · CAD</div>
+      <div class="project-name">Arbor Press Design</div>
+      <p class="project-desc">Mechanical arbor press engineered from concept through final technical drafting. Applied engineering tolerances and standard fits to ensure precise component manufacturing alignment.</p>
+      <div class="project-chips">
+        <span class="chip">Fusion 360</span>
+        <span class="chip">AutoCAD</span>
+        <span class="chip">Tolerancing</span>
+        <span class="chip">Technical Drawing</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="h-line"></div>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header reveal">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Education</h2>
+  </div>
+
+  <div class="edu-card reveal">
+    <div class="edu-degree">B.Sc. Mechatronics Engineering</div>
+    <div class="edu-uni">Nile University — Giza, Egypt</div>
+    <div class="edu-meta">
+      <div class="edu-meta-item">
+        <span class="edu-meta-label">CGPA</span>
+        <span class="edu-meta-value">3.84 / 4.00</span>
+      </div>
+      <div class="edu-meta-item">
+        <span class="edu-meta-label">Duration</span>
+        <span class="edu-meta-value">2024 – 2028</span>
+      </div>
+      <div class="edu-meta-item">
+        <span class="edu-meta-label">Status</span>
+        <span class="edu-meta-value">In Progress</span>
+      </div>
+    </div>
+    <div class="edu-highlight">
+      <strong>Full Academic Scholarship</strong> — awarded based on outstanding high school performance.
+    </div>
+  </div>
+</section>
+
+<div class="h-line"></div>
+
+<!-- ACTIVITIES -->
+<section id="activities">
+  <div class="section-header reveal">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Activities</h2>
+  </div>
+
+  <div class="activity-list reveal">
+    <div class="activity-item">
+      <div>
+        <div class="activity-role">Project Presenter</div>
+        <div class="activity-org">UGRF 20th Edition — Nile University</div>
+        <p class="activity-desc">Showcased the Robot Parking Assistant mechatronics prototype, demonstrating embedded hardware integration and system design to university evaluators and peers.</p>
+      </div>
+      <div class="activity-year">2025</div>
+    </div>
+    <div class="activity-item">
+      <div>
+        <div class="activity-role">Competitive Programmer</div>
+        <div class="activity-org">Codeforces — Online</div>
+        <p class="activity-desc">Regularly solves algorithmic problems to sharpen logical processing speed and problem-solving under constraint.</p>
+      </div>
+      <div class="activity-year">2025 – Present</div>
+    </div>
+  </div>
+</section>
+
+<div class="h-line"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-layout">
+    <div class="reveal">
+      <h2 class="contact-cta">Let's build<br>something<br><span>real.</span></h2>
+      <p class="contact-sub">Open to collaborations, internships, and research opportunities. Feel free to reach out through any of the channels here.</p>
+      <a href="mailto:a.ayman2486@nu.edu.eg" class="btn btn-primary">Send an Email ↗</a>
+    </div>
+
+    <div class="contact-links reveal">
+      <a href="mailto:a.ayman2486@nu.edu.eg" class="contact-link">
+        <div>
+          <div class="contact-link-label">Email</div>
+          <div class="contact-link-value">a.ayman2486@nu.edu.eg</div>
+        </div>
+        <div class="contact-link-arrow">↗</div>
+      </a>
+      <a href="https://linkedin.com/in/abdurahman-ayman" target="_blank" class="contact-link">
+        <div>
+          <div class="contact-link-label">LinkedIn</div>
+          <div class="contact-link-value">linkedin.com/in/abdurahman-ayman</div>
+        </div>
+        <div class="contact-link-arrow">↗</div>
+      </a>
+      <a href="https://github.com/abdo3ouf" target="_blank" class="contact-link">
+        <div>
+          <div class="contact-link-label">GitHub</div>
+          <div class="contact-link-value">github.com/abdo3ouf</div>
+        </div>
+        <div class="contact-link-arrow">↗</div>
+      </a>
+      <div class="contact-link" style="cursor:default;">
+        <div>
+          <div class="contact-link-label">Phone</div>
+          <div class="contact-link-value">+20 114 760 6612</div>
+        </div>
+      </div>
+      <div class="contact-link" style="cursor:default; border-bottom: none;">
+        <div>
+          <div class="contact-link-label">Location</div>
+          <div class="contact-link-value">Giza, Egypt</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-text">© 2026 Abdurahman Ayman</span>
+  <span class="footer-text">Mechatronics Engineering · Nile University</span>
+</footer>
+
+<script>
+  document.querySelectorAll('.yt-wrap').forEach(wrap => {
+  wrap.addEventListener('click', () => {
+    const id = wrap.dataset.id;
+    wrap.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1" style="position:absolute;inset:0;width:100%;height:100%;border:none;" allowfullscreen allow="autoplay" referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+    wrap.style.cursor = 'default';
+  });
+});
+
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
